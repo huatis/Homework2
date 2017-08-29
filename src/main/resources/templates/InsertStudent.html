@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    $(document).ready(function(){
+        $("#submit").click(function(){
+            var object = { name: $("#name").val(), course: $("#course").val() };
+            var request = $.ajax({
+                method: "POST",
+                contentType: "application/json",
+                url: "/api/students",
+                data: JSON.stringify(object)
+            });
+            request.done(function() {
+                alert( "Success: ");
+            });
+            request.fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="row">
+        Name:<input type="text" id="name" />
+    </div>
+    <div class="row">
+        Course:<input type="text" id="course" /><br />
+    </div>
+    <div class="row">
+        <button id="submit">Add</button>
+    </div>
+    <div>
+        <a href="students">Back</a>
+    </div>
+</body>
+</html>

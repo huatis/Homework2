@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student details</title>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <div th:if="${student != null}">
+            <h2>Student details</h2>
+            <table class="table borderless">
+                <tr>
+                    <td>ID</td>
+                    <td th:text="${student.id}"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td th:text="${student.name}"></td>
+                </tr>
+                <tr>
+                    <td>Course</td>
+                    <td th:text="${student.course}"></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <a href="students">Back</a>
+        </div>
+    </div>
+</body>
+</html>
