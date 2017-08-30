@@ -34,7 +34,7 @@ public class ScheduledTasks {
         CompletableFuture<String> completableFuture
                 = CompletableFuture.supplyAsync(() ->  {
             try {
-                TimeUnit.SECONDS.sleep(4);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
