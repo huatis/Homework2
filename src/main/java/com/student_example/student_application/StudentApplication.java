@@ -15,7 +15,6 @@ public class StudentApplication {
 	}
 }*/
 @SpringBootApplication
-@EnableScheduling
 public class StudentApplication extends SpringBootServletInitializer {
 
 	@Override

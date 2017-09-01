@@ -16,8 +16,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/deletestudent").access("hasRole('ADMIN')")
-                .antMatchers("/**").access("hasRole('USER') or hasRole('ADMIN')")
+                //.antMatchers("/deletestudent").access("hasRole('ADMIN')")
+                //.antMatchers("/**").access("hasRole('USER') or hasRole('ADMIN')")
                 .and().exceptionHandling().accessDeniedPage("/accesdenied")
                 .and()
                 .formLogin()

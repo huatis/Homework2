@@ -11,7 +11,7 @@ import java.util.Collection;
 @Service
 public class StudentService {
     @Autowired
-    @Qualifier("MySQLData")
+    @Qualifier("FakeData")
     private StudentDao studentDao;
     public Collection<Student> getAllStudents()
     {
