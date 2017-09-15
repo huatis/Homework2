@@ -1,6 +1,6 @@
 package com.student_example.student_application.controller;
 
-import com.student_example.student_application.entity.Student;
+import com.student_example.student_application.exception.StudentNegativeIDException;
 import com.student_example.student_application.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class StudentsUIController {
         return mav;
     }
     @RequestMapping(value = "/student")
-    public ModelAndView getOneStudent(Model model, @RequestParam(value = "id") int id) {
+    public ModelAndView getOneStudent(Model model, @RequestParam(value = "id") int id) throws StudentNegativeIDException {
         ModelAndView mav = new ModelAndView("StudentDetails");
         mav.addObject("student", studentService.getStudentById(id));
         return mav;

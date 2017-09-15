@@ -1,6 +1,7 @@
 package com.student_example.student_application.controller;
 
 import com.student_example.student_application.entity.Student;
+import com.student_example.student_application.exception.StudentNegativeIDException;
 import com.student_example.student_application.service.StudentService;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,7 @@ public class StudentController {
         return new ResponseEntity(studentService.getAllStudents(), HttpStatus.OK);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Student getStudentById(@PathVariable("id") int id)
-    {
+    public Student getStudentById(@PathVariable("id") int id) throws StudentNegativeIDException {
         return this.studentService.getStudentById(id);
     }
 
