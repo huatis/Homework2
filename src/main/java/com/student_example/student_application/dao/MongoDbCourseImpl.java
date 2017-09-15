@@ -8,51 +8,54 @@ import com.mongodb.client.MongoDatabase;
 import com.student_example.student_application.entity.Course;
 import com.student_example.student_application.entity.Student;
 import org.bson.Document;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Order;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
+import static org.springframework.data.mongodb.core.query.Query.*;
 
 @Repository
 @Qualifier("MongoDB")
 public class MongoDbCourseImpl implements CourseDao{
 
+    CourseRepository courses;
+
+    public MongoDbCourseImpl(CourseRepository courses) {
+        this.courses = courses;
+    }
+
     @Override
-    public Collection<Course> getAllCourses() {
-        MongoCredential credential = MongoCredential.createCredential("user", "db", "Anna2012".toCharArray());
-        MongoClient mongo =  new MongoClient(new ServerAddress("localhost", 27017), Arrays.asList(credential));
-        MongoDatabase db = mongo.getDatabase("db");
-        MongoCollection<Document> studentsCollection = db.getCollection("students");
-        FindIterable<Document> fi = studentsCollection.find();
-        MongoCursor cursor = fi.iterator();
-        List<Student> studentList = new ArrayList<>();
-        while(cursor.hasNext())
-        {
-            studentList.add((Student)cursor.next());
-        }
-        return null;
+    public Collection<Course> getAllCourses()
+    {
+        Collection<Course> myList = courses.findAll();//(new Sort.Order(Sort.Direction.ASC, "id"));
+        myList.stream().sorted(Comparator.comparing(Course::getId));
+        return myList;
+
     }
 
     @Override
     public Course getCourseByID(int id) {
-        return null;
+        return this.courses.getCourseById2(id);
     }
 
     @Override
     public void removeCourseById(int id) {
-
+        this.courses.deleteCourseById(id);
     }
 
     @Override
     public void insertCourse(Course course) {
-
+        this.courses.insert(course);
     }
 
     @Override
     public void updateCourse(Course course) {
-
+        this.courses.save(course);
     }
 }
